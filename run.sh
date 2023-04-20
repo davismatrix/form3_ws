@@ -28,5 +28,14 @@ popd
 echo Applying terraform script
 pushd /vagrant/tf
 terraform init -upgrade
-terraform apply -auto-approve
+#terraform apply -auto-approve
+terraform workspace new dev
+terraform init
+terraform apply -var-file=dev.tfvars -auto-approve
+terraform workspace new prod
+terraform init
+terraform apply -var-file=prod.tfvars -auto-approve
+terraform workspace new stage
+terraform init
+terraform apply -var-file=stage.tfvars -auto-approve
 popd
